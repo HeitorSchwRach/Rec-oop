@@ -182,18 +182,17 @@ class inimigoM extends Mago {
 
 class Jogo {
     constructor() {
-        this.personagens = [];
-    }
-
-    adicionarPersonagem(personagem) {
-        this.personagens.push(personagem);
+        this.personagens = [
+        new Guerreiro(100, 20, 10),
+        new Mago(80, 15, 18),
+        new Arqueiro(90, 12, 8, 100),
+        new InimigoG(120, 10, 5),
+        new inimigoM(70, 10, 16),
+        new InimigoA(80, 10, 7, 80),
+        ];
     }
 }
-const guerreiro = new Guerreiro(100, 20, 10);
-const mago = new Mago(80, 15, 18);
-const arqueiro = new Arqueiro(90, 12, 8, 100);
-const inimigoGuerreiro = new InimigoG(120, 10, 5);
-const inimigoMago = new inimigoM(70,10,16)
-const inimigoArqueiro = new InimigoA(80,10,7,80)
-const jogo = new Jogo();
+
+
+const jogo = new Jogo()
 
