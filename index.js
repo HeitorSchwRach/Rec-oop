@@ -191,6 +191,11 @@ class Jogo {
         new InimigoA(80, 10, 7, 80),
         ];
     }
+    chamarAtaques(){
+        this.personagens.forEach(personagens => {
+            personagens.atacar
+        });
+    }
 }
 
 
