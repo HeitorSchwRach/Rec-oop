@@ -6,6 +6,19 @@ class Personagem{
         this.stamina = stamina
         this.precisao = precisao
     }
+    atacar(){
+        InimigoG.vida -= this.forca
+    }
+
+    defender(){
+        if(this.vida ){
+            InimigoG.atacar() && Personagem.defender()
+            this.vida = this.vida
+        }
+    }
+    usarMagia(){
+        InimigoG -= this.forca
+    }
 }
 
 class Guerreiro extends Personagem{
@@ -24,5 +37,11 @@ class Mago extends Personagem{
 class Arqueiro extends Personagem{
     constructor(vida, forca, stamina, precisao){
         super(vida, forca, stamina, precisao)
+    }
+}
+
+class InimigoG extends Personagem{
+    constructor(vida, forca, stamina){
+        super(vida, forca, stamina)
     }
 }
