@@ -67,20 +67,13 @@ class Guerreiro extends Personagem {
 
     atacar(inimigo) {
         if (this.stamina >= 3) {
-            console.log("aaa")
+            console.log("Guerreiro ataca!");
             inimigo.vida -= this.forca;
             this.stamina -= 3;
         } else {
             console.log('Guerreiro está cansado demais para atacar.');
         }
     }
-
-    defender(Guerreiro) {
-        if (Guerreiro = this.defender = true) {
-            Guerreiro.vida -= 0
-        }
-    }
-
 }
 
 class Mago extends Personagem {
@@ -90,6 +83,7 @@ class Mago extends Personagem {
 
     usarMagia(inimigo) {
         if (this.mana >= 5) {
+            console.log("Mago usa magia!");
             inimigo.vida -= this.forca;
             this.mana -= 5;
         } else {
@@ -100,7 +94,6 @@ class Mago extends Personagem {
     atacar(inimigo) {
         this.usarMagia(inimigo);
     }
-
 }
 
 class Arqueiro extends Personagem {
@@ -110,6 +103,7 @@ class Arqueiro extends Personagem {
 
     atacar(inimigo) {
         if (this.stamina >= 2) {
+            console.log("Arqueiro ataca!");
             inimigo.vida -= this.forca;
             this.stamina -= 2;
         } else {
@@ -123,31 +117,22 @@ class Arqueiro extends Personagem {
             this.precisao -= 15;
         }
     }
-
-
 }
 
 class InimigoG extends Personagem {
     constructor(vida, forca, stamina) {
-        super(vida, forca, 0, stamina, 0)
+        super(vida, forca, 0, stamina, 0);
     }
 
     atacar(inimigo) {
         if (this.stamina >= 3) {
+            console.log("InimigoG ataca!");
             inimigo.vida -= this.forca;
             this.stamina -= 3;
         } else {
             console.log('InimigoG está cansado demais para atacar.');
         }
     }
-
-    defender(InimigoG) {
-        if (InimigoG = this.defender = true) {
-            InimigoG.vida -= 0
-        }
-
-    }
-
 }
 
 class InimigoA extends Personagem {
@@ -157,10 +142,11 @@ class InimigoA extends Personagem {
 
     atacar(inimigo) {
         if (this.stamina >= 2) {
+            console.log("InimigoA ataca!");
             inimigo.vida -= this.forca;
             this.stamina -= 2;
         } else {
-            console.log('Arqueiro sem stamina suficiente para atacar.');
+            console.log('InimigoA sem stamina suficiente para atacar.');
         }
     }
 
@@ -170,17 +156,16 @@ class InimigoA extends Personagem {
             this.precisao -= 15;
         }
     }
-
-
 }
 
-class inimigoM extends Personagem {
+class InimigoM extends Personagem {
     constructor(vida, mana, forca) {
         super(vida, forca, mana, 0, 0);
     }
 
     usarMagia(inimigo) {
         if (this.mana >= 5) {
+            console.log("InimigoM usa magia!");
             inimigo.vida -= this.forca;
             this.mana -= 5;
         } else {
@@ -191,7 +176,6 @@ class inimigoM extends Personagem {
     atacar(inimigo) {
         this.usarMagia(inimigo);
     }
-
 }
 
 class Jogo {
@@ -201,65 +185,53 @@ class Jogo {
             new Mago(80, 15, 18),
             new Arqueiro(90, 12, 8, 100),
             new InimigoG(120, 10, 5),
-            new inimigoM(70, 10, 16),
+            new InimigoM(70, 10, 16),
             new InimigoA(80, 10, 7, 80),
         ];
     }
-    chamarAtaques() {
-        this.personagens.forEach(personagens => {
-            personagens.atacar
-        });
-    }
-    PVP(){
-        switch( Arqueiro, InimigoA){
-            case Arqueiro.atacar && InimigoA.atacar:
-                Arqueiro.vida -= InimigoA.forca;
-                InimigoA.vida -= Arqueiro.forca;
-                break
-            case Arqueiro.atacar && InimigoA.defender:
-            break
-            case Arqueiro.defender && InimigoA.atacar :
-        }
+
+    turno() {
+        const aliados = this.personagens.slice(0, 3);
+        const inimigos = this.personagens.slice(3);
+
+        const p1 = aliados[Math.floor(Math.random() * aliados.length)];
+        const p2 = inimigos[Math.floor(Math.random() * inimigos.length)];
+
+        console.log(`\n>> Novo turno iniciado!`);
+        console.log(`Escolhido: ${p1.constructor.name} vs ${p2.constructor.name}`);
+        batalhar(p1, p2);
     }
 }
 
 function batalhar(p1, p2) {
     console.log(`Batalha entre ${p1.constructor.name} e ${p2.constructor.name} começou!`);
-
-
     let rodada = 1;
-
 
     while (p1.vida > 0 && p2.vida > 0) {
         console.log(`\nRodada ${rodada}:`);
-        
+
         console.log(`${p1.constructor.name} ataca!`);
         p1.atacar(p2);
         console.log(`${p2.constructor.name} tem ${p2.vida} de vida restante.`);
-
 
         if (p2.vida <= 0) {
             console.log(`${p2.constructor.name} foi derrotado!`);
             break;
         }
 
-
         console.log(`${p2.constructor.name} ataca!`);
         p2.atacar(p1);
         console.log(`${p1.constructor.name} tem ${p1.vida} de vida restante.`);
-
 
         if (p1.vida <= 0) {
             console.log(`${p1.constructor.name} foi derrotado!`);
             break;
         }
 
-
         rodada++;
     }
 }
 
 
-const jogo = new Jogo()
-
-//Se faltar pouco para um A ou B da um chorinho pelo esforco, complexidade e tentativa kkkkkkkk
+const jogo = new Jogo();
+jogo.turno(); 
