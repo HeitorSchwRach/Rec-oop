@@ -79,7 +79,6 @@ class Guerreiro extends Personagem {
         if (Guerreiro = this.defender = true) {
             Guerreiro.vida -= 0
         }
-
     }
 
 }
@@ -128,7 +127,7 @@ class Arqueiro extends Personagem {
 
 }
 
-class InimigoG extends Guerreiro {
+class InimigoG extends Personagem {
     constructor(vida, forca, stamina) {
         super(vida, forca, 0, stamina, 0)
     }
@@ -151,7 +150,7 @@ class InimigoG extends Guerreiro {
 
 }
 
-class InimigoA extends Arqueiro {
+class InimigoA extends Personagem {
     constructor(vida, forca, stamina, precisao) {
         super(vida, forca, 0, stamina, precisao);
     }
@@ -175,7 +174,7 @@ class InimigoA extends Arqueiro {
 
 }
 
-class inimigoM extends Mago {
+class inimigoM extends Personagem {
     constructor(vida, mana, forca) {
         super(vida, forca, mana, 0, 0);
     }
@@ -211,8 +210,56 @@ class Jogo {
             personagens.atacar
         });
     }
+    PVP(){
+        switch( Arqueiro, InimigoA){
+            case Arqueiro.atacar && InimigoA.atacar:
+                Arqueiro.vida -= InimigoA.forca;
+                InimigoA.vida -= Arqueiro.forca;
+                break
+            case Arqueiro.atacar && InimigoA.defender:
+            break
+            case Arqueiro.defender && InimigoA.atacar :
+        }
+    }
+}
+
+function batalhar(p1, p2) {
+    console.log(`Batalha entre ${p1.constructor.name} e ${p2.constructor.name} começou!`);
+
+
+    let rodada = 1;
+
+
+    while (p1.vida > 0 && p2.vida > 0) {
+        console.log(`\nRodada ${rodada}:`);
+        
+        console.log(`${p1.constructor.name} ataca!`);
+        p1.atacar(p2);
+        console.log(`${p2.constructor.name} tem ${p2.vida} de vida restante.`);
+
+
+        if (p2.vida <= 0) {
+            console.log(`${p2.constructor.name} foi derrotado!`);
+            break;
+        }
+
+
+        console.log(`${p2.constructor.name} ataca!`);
+        p2.atacar(p1);
+        console.log(`${p1.constructor.name} tem ${p1.vida} de vida restante.`);
+
+
+        if (p1.vida <= 0) {
+            console.log(`${p1.constructor.name} foi derrotado!`);
+            break;
+        }
+
+
+        rodada++;
+    }
 }
 
 
 const jogo = new Jogo()
 
+//Se faltar pouco para um A ou B da um chorinho pelo esforco, complexidade e tentativa kkkkkkkk
