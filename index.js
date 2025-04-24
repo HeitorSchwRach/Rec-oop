@@ -67,11 +67,19 @@ class Guerreiro extends Personagem {
 
     atacar(inimigo) {
         if (this.stamina >= 3) {
+            console.log("aaa")
             inimigo.vida -= this.forca;
             this.stamina -= 3;
         } else {
             console.log('Guerreiro está cansado demais para atacar.');
         }
+    }
+
+    defender(Guerreiro) {
+        if (Guerreiro = this.defender = true) {
+            Guerreiro.vida -= 0
+        }
+
     }
 
 }
@@ -134,6 +142,13 @@ class InimigoG extends Guerreiro {
         }
     }
 
+    defender(InimigoG) {
+        if (InimigoG = this.defender = true) {
+            InimigoG.vida -= 0
+        }
+
+    }
+
 }
 
 class InimigoA extends Arqueiro {
@@ -183,15 +198,15 @@ class inimigoM extends Mago {
 class Jogo {
     constructor() {
         this.personagens = [
-        new Guerreiro(100, 20, 10),
-        new Mago(80, 15, 18),
-        new Arqueiro(90, 12, 8, 100),
-        new InimigoG(120, 10, 5),
-        new inimigoM(70, 10, 16),
-        new InimigoA(80, 10, 7, 80),
+            new Guerreiro(100, 20, 10),
+            new Mago(80, 15, 18),
+            new Arqueiro(90, 12, 8, 100),
+            new InimigoG(120, 10, 5),
+            new inimigoM(70, 10, 16),
+            new InimigoA(80, 10, 7, 80),
         ];
     }
-    chamarAtaques(){
+    chamarAtaques() {
         this.personagens.forEach(personagens => {
             personagens.atacar
         });
